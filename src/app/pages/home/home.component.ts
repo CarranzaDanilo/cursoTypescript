@@ -21,9 +21,10 @@ export class HomeComponent implements OnInit {
     console.log(myNumber.toFixed);
   }
 
+
   ngOnInit(): void {}
 
-  toogleCheck() {
+  toggleCheck() {
     this.isChecked = !this.isChecked;
     this.getProducts();
   }

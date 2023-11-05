@@ -1,1 +1,18 @@
-<p>arrays works!</p>
+<section>
+  <div class="container">
+    <h3>Arrays</h3>
+    <p>My array: {{myArray}}</p>
+    <ul *ngFor="let item of myArray">
+      <li>{{item}}</li>
+    </ul>
+  </div>
+</section>
+<hr>
+<section>
+  <div class="container">
+    <h3>Products</h3>
+    <ul *ngFor="let item of products">
+      <li>{{item.title}}</li>
+    </ul>
+  </div>
+</section>

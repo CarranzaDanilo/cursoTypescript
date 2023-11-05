@@ -9,20 +9,27 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ArraysComponent } from './pages/arrays/arrays.component';
+import { TypesComponent } from './pages/types/types.component';
+import { RxjsOperatorsComponent } from './pages/rxjs-operators/rxjs-operators.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    ArraysComponent
+    ArraysComponent,
+    TypesComponent,
+    RxjsOperatorsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
-    MatCardModule
-  ],
+    MatCardModule,
+    HttpClientModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
