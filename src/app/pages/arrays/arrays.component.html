@@ -1,24 +1,69 @@
 <hr>
 <section>
-  <div class="container">
+  <div class="container-fluid">
     <h3>Products</h3>
     <ul *ngFor="let item of products">
-      <li><b>Title:</b> {{item.title}} <b>Price:</b> {{item.price}}</li>
-    </ul>
-    <h3>Products increased by map =
-      <pre>
-        {{ '\n' +
-        'this.productsIncreased = this.products.map((item) => {\n' +
-        '  return {\n' +
-        '    ...item,\n' +
-        '    price: item.price * 1.2,\n' +
-        '  };\n' +
-        '});\n' + '' }}
-    </pre>
-    </h3>
-    <h2>Result: </h2>
-    <ul *ngFor="let item of productsIncreased">
-      <li><b>Title:</b> {{item.title}} <b>Price:</b> {{item.price}}</li>
+      <li><b>Title:</b> {{item.title}} <b>Price:</b> {{item.price | currency}}</li>
     </ul>
   </div>
 </section>
+<hr>
+<div class="container-fluid">
+<h2>Map</h2>
+<h3>Products increased by map =
+  <pre>
+    {{ '\n' +
+    'this.productsIncreased = this.products.map((item) => {\n' +
+    '  return {\n' +
+    '    ...item,\n' +
+    '    price: item.price * 1.2,\n' +
+    '  };\n' +
+    '});\n' + '' }}
+</pre>
+</h3>
+<h2>Result: </h2>
+<ul *ngFor="let item of productsIncreased">
+  <li><b>Title:</b> {{item.title}} <b>Price:</b> {{item.price}}</li>
+</ul>
+<h3>Orders</h3>
+<pre>
+  {{'this.orders.map(item => item.total)'}}
+</pre>
+<hr>
+<ul *ngFor="let item of orders">
+  <li>{{item}}</li>
+</ul>
+</div>
+<div class="container-fluid">
+<h3>Orders with IVA</h3>
+<pre>
+  {{'this.ordersWithIVA = orders.map( item => {\n' +
+    '  return {\n' +
+    '  ...item,\n' +
+    '  IVA: item.total * 0.21\n'+
+    '  };\n' +
+  '  })'}}
+</pre>
+<hr>
+<ul *ngFor="let item of ordersWithIVA">
+  <li>{{item | json}}</li>
+</ul>
+</div>
+<hr>
+<section class="container-fluid">
+<h2>Filter</h2>
+<hr>
+<pre>this.productsFilterByPrice = products.filter(item => item.price > 500 && item.title.includes('Modern'));</pre>
+<ul *ngFor="let item of productsFilterByPrice">
+  <li>{{item.title}} Price: {{item.price}}</li>
+</ul>
+</section>
+<section class="container-fluid">
+  <h2>Reduce</h2>
+  <hr>
+  <pre>this.productsTotalByReduce = products.reduce((total, product) => total + product.price, 0);</pre>
+  <ul>
+    <li>Suma total de los prices: {{productsTotalByReduce | currency}}</li>
+  </ul>
+  </section>
+
