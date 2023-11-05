@@ -10,9 +10,10 @@ import { ProductService } from 'src/app/services/product.service';
 export class ArraysComponent implements OnInit {
   productService = inject(ProductService);
   products: Product[] = [];
-  productsIncreased: Product[] = [];
+  productsIncreased: any[] = [];
   productsFilterByPrice: Product[] = [];
   productsTotalByReduce: any;
+  existProductsCategoryOthers: boolean;
   myArray: number[] = [];
   orders: any[] = [];
   ordersWithIVA: any[] = [];
@@ -60,35 +61,47 @@ export class ArraysComponent implements OnInit {
     this.myArray = prices;
   }
 
+  productsBase: Product[] = [];
+
   getProducts() {
     this.productService
       .getAllProducts()
       .then((resp: Product[]) => {
-        this.products = resp;
+        this.products =  resp;
         // Mapea los productos y guárdalos en productsIncreased cuando los datos estén disponibles.
+        console.log(this.products);
         this.addIVA(this.products);
         this.filterProducts(this.products);
         this.totalByReduce(this.products);
+        this.getProductsOthers(this.products);
       })
       .catch((error) => {
         console.log(error);
       });
+
   }
 
   filterProducts(products: Product[]) {
-    this.productsFilterByPrice = products.filter((item) => item.price > 500 && item.title.includes('Modern'));
+    this.productsFilterByPrice = products.filter(
+      (item) => item.price > 500 && item.title.includes('Modern')
+    );
   }
 
   addIVA(products: Product[]) {
     this.productsIncreased = products.map((item) => {
       return {
         ...item,
-        price: item.price * 1.2,
+        priceWithIva: item.price * 1.21,
       };
     });
   }
 
-  totalByReduce(products: Product[]){
-    this.productsTotalByReduce = products.reduce((total, product) => total + product.price, 0);
+  totalByReduce(products: Product[]) {
+    this.productsTotalByReduce = products.reduce(
+      (total, product) => total + product.price, 0);
+  }
+
+  getProductsOthers(products: Product[]){
+    this.existProductsCategoryOthers = products.some(item => item.category.name.includes('Shoes'));
   }
 }
